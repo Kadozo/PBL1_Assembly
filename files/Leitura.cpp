@@ -19,7 +19,7 @@ int** matrix_reader( FILE *fp ){
 
 int main(void){
 	FILE *fp;
-	fp = fopen("padr„o_matrizes.txt","r");
+	fp = fopen("padr√£o_matrizes.txt","r");
 	int **matriz_a = matrix_reader(fp);
 	int **matriz_b = matrix_reader(fp);
 	printf("%d",matriz_a[9][5]);
