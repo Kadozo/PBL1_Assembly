@@ -13,7 +13,8 @@
  int soma( int a,  int b) {
 	 int c;
 	__asm__(
-		"imul %1, %2"
+		"mul %2\n"
+		"mov %[saida],%%eax"
 		:[saida] "=r" (c)
 		: "r" (a),"r" (b)
 	);
