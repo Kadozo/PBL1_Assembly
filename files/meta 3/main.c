@@ -7,10 +7,10 @@
  int main() {
 	 int x, y;
 	scanf("%d %d", &x, &y);
-	printf("resultado = %d\n", soma(x, y));
+	printf("resultado = %d\n", mult(x, y));
 }
 
- int soma( int a,  int b) {
+ int mult( int a,  int b) {
 	 int c;
 	__asm__(
 		"mul %2\n"
