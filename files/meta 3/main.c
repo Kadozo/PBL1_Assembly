@@ -6,7 +6,7 @@
 
  int main() {
 	 int x, y;
-	scanf("%d %d %d", &x, &y);
+	scanf("%d %d", &x, &y);
 	printf("resultado = %d\n", soma(x, y));
 }
 
