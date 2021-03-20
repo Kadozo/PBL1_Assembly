@@ -261,49 +261,84 @@ void MatrixCalculator( char * arq,int flag){
 		free(linB);
 		free(colA);
 		free(colB);
-		int ** matriz_c;
 		// aqui é chamada  a função que realiza a multiplicação das duas matrizes lidas no arquivo.
 		if(flag){
-			matriz_c = multMatriz(matriz_a,matriz_b, tamA, tamB);
-		}
-		else{
-			matriz_c = multMatrizASM(matriz_a,matriz_b, tamA, tamB);
-		}
-		
-		//caso as matrizes não possam ser multiplicadas
-		if(matriz_c == NULL){
-			printf("*******ERROR 0002*******\n\n");
-			printf("Nao foi possivel realizar a multiplicacao. . .");
-			getchar();
-		}
-		// se as matrizes forem multiplicadas o resultado é mostrado
-		else{
-			int tamC[] = {tamA[0], tamB[1]};
-			printf("Matrizes multiplicadas.\nResultado:\n");
-			for(i=0; i<tamC[0]; i++){
-				for(j=0; j<tamC[1]; j++){
-					printf("%d ", matriz_c[i][j]);
-				}
-				printf("\n");
-			}
+			int ** matriz_c = multMatriz(matriz_a,matriz_b, tamA, tamB);
 			
-			// e então, a matrizes resultado é introduzida no já existente ( ou não)
-			// arquivo de matrizes resultado.
-			int verify = matrixWrite(matriz_c, tamC);
-			
-			// é feito uma verificação se o arquivo foi mesmo escrito e avisado ao usuário.
-			if(verify  == 0){
-				printf("Erro ao abrir o arquivo!\n");
-				printf("*******ERROR 0003*******\n");
+			//caso as matrizes não possam ser multiplicadas
+			if(matriz_c == NULL){
+				printf("*******ERROR 0002*******\n\n");
+				printf("Nao foi possivel realizar a multiplicacao. . .");
+				getchar();
 			}
+			// se as matrizes forem multiplicadas o resultado é mostrado
 			else{
-				printf("\nMatriz salva com sucesso!\n\n");
-				printf("Procure por matriz_resultado.txt no diretório da aplicacao. . . .");
+				int tamC[] = {tamA[0], tamB[1]};
+				printf("Matrizes multiplicadas.\nResultado:\n");
+				for(i=0; i<tamC[0]; i++){
+					for(j=0; j<tamC[1]; j++){
+						printf("%d ", matriz_c[i][j]);
+					}
+					printf("\n");
+				}
+				
+				// e então, a matrizes resultado é introduzida no já existente ( ou não)
+				// arquivo de matrizes resultado.
+				int verify = matrixWrite(matriz_c, tamC);
+				
+				// é feito uma verificação se o arquivo foi mesmo escrito e avisado ao usuário.
+				if(verify  == 0){
+					printf("Erro ao abrir o arquivo!\n");
+					printf("*******ERROR 0003*******\n");
+				}
+				else{
+					printf("\nMatriz salva com sucesso!\n\n");
+					printf("Procure por matriz_resultado.txt no diretório da aplicacao. . . .");
+				}
+				// aqui é liberado o espaço das matrizes que foram alocadas.
+				free(matriz_a);
+				free(matriz_b);
+				free(matriz_c);
 			}
-			// aqui é liberado o espaço das matrizes que foram alocadas.
-			free(matriz_a);
-			free(matriz_b);
-			free(matriz_c);
+		}
+		else{
+			int ** matriz_c = multMatrizASM(matriz_a,matriz_b, tamA, tamB);
+			
+			//caso as matrizes não possam ser multiplicadas
+			if(matriz_c == NULL){
+				printf("*******ERROR 0002*******\n\n");
+				printf("Nao foi possivel realizar a multiplicacao. . .");
+				getchar();
+			}
+			// se as matrizes forem multiplicadas o resultado é mostrado
+			else{
+				int tamC[] = {tamA[0], tamB[1]};
+				printf("Matrizes multiplicadas.\nResultado:\n");
+				for(i=0; i<tamC[0]; i++){
+					for(j=0; j<tamC[1]; j++){
+						printf("%d ", matriz_c[i][j]);
+					}
+					printf("\n");
+				}
+				
+				// e então, a matrizes resultado é introduzida no já existente ( ou não)
+				// arquivo de matrizes resultado.
+				int verify = matrixWrite(matriz_c, tamC);
+				
+				// é feito uma verificação se o arquivo foi mesmo escrito e avisado ao usuário.
+				if(verify  == 0){
+					printf("Erro ao abrir o arquivo!\n");
+					printf("*******ERROR 0003*******\n");
+				}
+				else{
+					printf("\nMatriz salva com sucesso!\n\n");
+					printf("Procure por matriz_resultado.txt no diretório da aplicacao. . . .");
+				}
+				// aqui é liberado o espaço das matrizes que foram alocadas.
+				free(matriz_a);
+				free(matriz_b);
+				free(matriz_c);
+			}
 		}
 	}
 }
