@@ -90,44 +90,43 @@ int **multMatrizASM(int **A, int **B, int tamA[2], int tamB[2]){
 		"mov DWORD PTR[rbp-4],0\n" //i
 		"mov DWORD PTR[rbp-8],0\n" //j
 		"mov DWORD PTR[rbp-12],0\n" //k
-        "LOOP1:\n" //rótulo do loop1
-            "cmp [rbp-4], r8d\n"    //compara i com tam
-            "jge ENDLOOP1\n" //se i>= tam salta para o final de ENDLOOP1
-            "LOOP2:\n" //rótulo do loop2
-                "cmp [rbp-8], r8d\n"    //compara j com tam
-                "jge ENDLOOP2\n" //se j>= tam salta para o ENDLOOP2
-                "LOOP3:\n" //rótulo do loop3 
-                    "cmp [rbp-12], r8d\n"    //compara k com tam
-                    "jge ENDLOOP3\n" //se k >= tam salta para o ENDLOOP3
+       	 	"LOOP1:\n" //rótulo do loop1
+            		"cmp [rbp-4], r8d\n"    //compara i com tam
+            		"jge ENDLOOP1\n" //se i>= tam salta para o final de ENDLOOP1
+            		"LOOP2:\n" //rótulo do loop2
+                		"cmp [rbp-8], r8d\n"    //compara j com tam
+                		"jge ENDLOOP2\n" //se j>= tam salta para o ENDLOOP2
+                		"LOOP3:\n" //rótulo do loop3 
+                    			"cmp [rbp-12], r8d\n"    //compara k com tam
+                    			"jge ENDLOOP3\n" //se k >= tam salta para o ENDLOOP3
 					
-					"mov ebx,[rbp-12]\n"  //ebx recebe k           
+					"mov ebx,[rbp-4]\n" //ebx recebe i
+                    			"mov r9d,[rdx+8*rbx]\n"//r9d é um endereço de A[i][]
+                    			"mov r11d,[rax+8*rbx]\n"//r11d é um endereço de C[i][]
+                   			 
+                    			"mov ebx,[rbp-12]\n"  //ebx recebe k           
 					"mov r10d,[rcx+8*rbx]\n" //r10d é um endereço de B[k][]
-					
-                    
-                    "mov ebx,[rbp-4]\n" //ebx recebe i
-                    "mov r9d,[rdx+8*rbx]\n"//r9d é um endereço de A[i][]
-                    "mov r11d,[rax+8*rbx]\n"//r11d é um endereço de C[i][]
-                    
+					"mov r9d,[r9d+4*ebx]\n"//r9d recebe o valor de A[i][k]
+                    			
 					"mov ebx,[rbp-8]\n"//ebx recebe j
-                    "mov r9d,[r9d+4*ebx]\n"//r9d recebe o valor de A[i][j]
-                    "mov r10d,[r10d+4*ebx]\n" //recebe valor B[k][j]
+                    			"mov r10d,[r10d+4*ebx]\n" //recebe valor B[k][j]
                     
-                    "imul r10d,r9d\n" //r10d = r10d*r9d    //r10d = A[i][j]*B[k][j]
-                    "add [r11d+4*ebx],r10d\n" // C[i][j] = C[i][j] + r10d
+    					"imul r10d,r9d\n" //r10d = r10d*r9d    //r10d = A[i][k]*B[k][j]
+    					"add [r11d+4*ebx],r10d\n" // C[i][j] = C[i][j] + r10d
                     
                     
 					"inc DWORD PTR[rbp-12]\n"        //incremente k
-                    "jmp LOOP3\n" //Salta para o rótulo LOOP3
-                "ENDLOOP3:\n" //Rótulo ENDLOOP3
-                "inc DWORD PTR[rbp-8]\n"            //incrementa j
-                "mov DWORD PTR[rbp-12], 0\n"        //zera k
-                "jmp LOOP2\n" //Salta para o rótulo LOOP2
-            "ENDLOOP2:\n" //Rótulo ENDLOOP2
-            "inc DWORD PTR[rbp-4]\n"                // incrementa i
-            "mov DWORD PTR[rbp-8], 0\n"                //zera j
-            "jmp LOOP1\n" //Salta para o rótulo LOOP1
-        "ENDLOOP1:\n" //Rótulo ENDLOOP1
-        "pop rbp\n"
+    					"jmp LOOP3\n" //Salta para o rótulo LOOP3
+			 	"ENDLOOP3:\n" //Rótulo ENDLOOP3
+                		"inc DWORD PTR[rbp-8]\n"            //incrementa j
+                		"mov DWORD PTR[rbp-12], 0\n"        //zera k
+                		"jmp LOOP2\n" //Salta para o rótulo LOOP2
+            		"ENDLOOP2:\n" //Rótulo ENDLOOP2
+            		"inc DWORD PTR[rbp-4]\n"                // incrementa i
+            		"mov DWORD PTR[rbp-8], 0\n"                //zera j
+            		"jmp LOOP1\n" //Salta para o rótulo LOOP1
+		"ENDLOOP1:\n" //Rótulo ENDLOOP1
+        	"pop rbp\n"
         : [saida] "+r" (C)
         : "r" (A), "r" (B), "r" (tamA[0])
 	);
