@@ -91,13 +91,13 @@ int **multMatrizASM(int **A, int **B, int tamA[2], int tamB[2]){
 		"mov DWORD PTR[rbp-8],0\n" //j
 		"mov DWORD PTR[rbp-12],0\n" //k
        	 	"LOOP1:\n" //rótulo do loop1
-            		"cmp [rbp-4], r8d\n"    //compara i com tam
+            		"cmp [rbp-4], esi\n"    //compara i com tam
             		"jge ENDLOOP1\n" //se i>= tam salta para o final de ENDLOOP1
             		"LOOP2:\n" //rótulo do loop2
-                		"cmp [rbp-8], r8d\n"    //compara j com tam
+                		"cmp [rbp-8], esi\n"    //compara j com tam
                 		"jge ENDLOOP2\n" //se j>= tam salta para o ENDLOOP2
                 		"LOOP3:\n" //rótulo do loop3 
-                    			"cmp [rbp-12], r8d\n"    //compara k com tam
+                    			"cmp [rbp-12], esi\n"    //compara k com tam
                     			"jge ENDLOOP3\n" //se k >= tam salta para o ENDLOOP3
 					
 					"mov ebx,[rbp-4]\n" //ebx recebe i
@@ -142,7 +142,7 @@ int **multMatrizASM(int **A, int **B, int tamA[2], int tamB[2]){
 /*
 	Função para leitura de uma matriz em um arquivo .txt com layout pré-
 definido. O layout do arquivo foi idealizado pelo grupo José Gabriel,
-Mateus e Thiago.
+Mateus Fernandes e Thiago Cardozo.
 
 Parâmetros:
 *fp = ponteiro do arquivo que será lido, já aberto e definido como leitura;
@@ -178,7 +178,7 @@ int** matrixReader( FILE *fp, int * lin, int * col){
 
 /*
 	Faz a escrita de uma matriz em um arquivo .txt com um layout pré-definido.
-O layout do arquivo foi idealizado pelo grupo José Gabriel, Mateus e Thiago.
+O layout do arquivo foi idealizado pelo grupo José Gabriel, Mateus Fernandes e Thiago Cardozo.
 
 Parâmetros:
 ** A = matriz que será escrita no arquivo;
@@ -277,14 +277,6 @@ void MatrixCalculator( char * arq,int flag){
 		}
 		// se as matrizes forem multiplicadas o resultado é mostrado
 		else{
-			int tamC[] = {tamA[0], tamB[1]};
-			printf("Matrizes multiplicadas.\nResultado:\n");
-			for(i=0; i<tamC[0]; i++){
-				for(j=0; j<tamC[1]; j++){
-					printf("%d ", matriz_c[i][j]);
-				}
-				printf("\n");
-			}
 			
 			// e então, a matrizes resultado é introduzida no já existente ( ou não)
 			// arquivo de matrizes resultado.
