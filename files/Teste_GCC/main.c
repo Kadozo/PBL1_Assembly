@@ -280,6 +280,7 @@ void MatrixCalculator( char * arq,int flag){
 			
 			// e então, a matrizes resultado é introduzida no já existente ( ou não)
 			// arquivo de matrizes resultado.
+			int tamC[] = {tamA[0], tamB[1]};
 			int verify = matrixWrite(matriz_c, tamC);
 			// aqui é liberado o espaço das matrizes que foram alocadas.
 			free(matriz_a);
