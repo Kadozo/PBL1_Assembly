@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 int **multMatriz(int **A, int **B, int tamA[2], int tamB[2]);
 int **multMatrizASM(int **A, int **B, int tamA[2], int tamB[2]);
@@ -82,7 +83,7 @@ int **multMatrizASM(int **A, int **B, int tamA[2], int tamB[2]){
 				C[i][j] = 0;
 			}
 		}
-		
+		clock_t begin = clock();
 		//lógica para a multiplicação das matrizes e preenchimento da terceira matriz em assembly
 	__asm__(
 		"push rbp\n" //inicia uma pilha
@@ -130,6 +131,10 @@ int **multMatrizASM(int **A, int **B, int tamA[2], int tamB[2]){
         : [saida] "+r" (C)
         : "r" (A), "r" (B), "r" (tamA[0])
 	);
+	clock_t end = clock();
+	double tempo = (double) (end - begin)/CLOCKS_PER_SEC;
+	FILE * fp = fopen("tempo.txt", "a");
+	fprintf(fp, "tempo: %.9lf\n", tempo);
 		return C;
 	}
 }
