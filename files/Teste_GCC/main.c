@@ -61,7 +61,7 @@ int **multMatriz(int **A, int **B, int tamA[2], int tamB[2]){
 		clock_t end = clock();
 		double tempo = (double) (end - begin)/CLOCKS_PER_SEC;
 		FILE * fp = fopen("tempo.txt", "a");
-		fprintf(fp, "tempo: %.9lf\n", tempo);
+		fprintf(fp, "tempo em C: %.9lf\n", tempo);
 		fclose(fp);
 		return C;
 	}
@@ -139,7 +139,7 @@ int **multMatrizASM(int **A, int **B, int tamA[2], int tamB[2]){
 	clock_t end = clock();
 		double tempo = (double) (end - begin)/CLOCKS_PER_SEC;
 		FILE * fp = fopen("tempo.txt", "a");
-		fprintf(fp, "tempo: %.9lf\n", tempo);
+		fprintf(fp, "tempo em ASM: %.9lf\n", tempo);
 		fclose(fp);
 		return C;
 	}
