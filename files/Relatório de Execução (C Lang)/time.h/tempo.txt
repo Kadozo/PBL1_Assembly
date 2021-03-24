@@ -1,0 +1,3 @@
+tempo em C: 0.000007000
+tempo em C: 0.005450000
+tempo em C: 11.017257000
