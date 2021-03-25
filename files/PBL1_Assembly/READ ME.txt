@@ -1,0 +1,26 @@
+Para realizar a multiplicação de matrizes desejada:
+
+1° - Vá a pasta "PBL1_Assembly\Gerador de matrizes".
+
+2° - Execute o .exe presente no diretório para gerar duas matrizes do tamanho desejado.
+	OBS1: As matrizes serão geradas com valores aleatórios de 0~100.
+	OBS2: Serão duas matrizes por arquivo.
+	OBS2: Caso não tenha um .exe no diretório, compile o .c na máquina usando o Makefile.
+
+3° - Pegue o arquivo resultante da execução que terá o nome "MatrizesFonte.txt" e coloque
+no diretório "PBL1_Assembly\Multiplicação de Matrizes".
+
+4° - Execute o .exe presente no diretório "PBL1_Assembly\Multiplicação de Matrizes" e escolha de qual
+forma deseja multiplicar.
+	OBS1: Caso não tenha um .exe no diretório, compile o .c na máquina usando o Makefile.
+
+Caso seja desejado utilizar uma matriz já definida, crie um arquivo .txt no diretório
+"PBL1_Assembly\Multiplicação de Matrizes" e disponha os elementos da seguinte forma:
+
+	Ex. de matriz 2x2:
+		2x2
+		a11,a12,a21,a22,
+		2x2
+		b11,b12,b21,b22,
+	OBS1: Esse arquivo só pode conter duas matrizes.
+	OBS2: na multiplicação de A*B, a matriz A é a primeira do arquivo, e a B é a subsequente.
